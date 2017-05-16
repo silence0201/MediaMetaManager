@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SIMediaItem.h"
+#import "MediaMetaManager.h"
 #import "NSObject+AutoCoding.h"
 
 @interface ViewController ()
