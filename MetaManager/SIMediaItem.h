@@ -2,7 +2,7 @@
 //  SIMediaItem.h
 //  MetaManagerDemo
 //
-//  Created by 杨晴贺 on 2017/5/16.
+//  Created by Silence on 2017/5/16.
 //  Copyright © 2017年 Silence. All rights reserved.
 //
 
@@ -17,8 +17,28 @@ typedef void(^SICompletionHandler)(BOOL complete);
 @property (strong, readonly) SIMetadata *metadata;
 @property (readonly, getter = isEditable) BOOL editable;
 
+/**
+ init With URL
+
+ @param url Resource URL
+ @return Resource SIMediaItem
+ */
 - (id)initWithURL:(NSURL *)url;
+
+
+/**
+ prepare Meta Data
+
+ @param handler is Success
+ */
 - (void)prepareWithCompletionHandler:(SICompletionHandler)handler;
+
+
+/**
+ Save Media
+
+ @param handler is Success
+ */
 - (void)saveWithCompletionHandler:(SICompletionHandler)handler;
 
 @end
