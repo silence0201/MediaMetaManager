@@ -16,7 +16,7 @@
 1. 导入头文件
 
 	```objective-c
-	#import "SIMediaItem.h"
+	#import "MediaMetaManager.h"
 	```
 
 2. 初始化
