@@ -49,6 +49,7 @@
 		E84732771ECA128300D5ED12 /* SIMetadataConverterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMetadataConverterFactory.m; sourceTree = "<group>"; };
 		E84732781ECA128300D5ED12 /* SIMetadataKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMetadataKeys.h; sourceTree = "<group>"; };
 		E84732791ECA128300D5ED12 /* SIMetadataKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMetadataKeys.m; sourceTree = "<group>"; };
+		E847327D1ECABBA300D5ED12 /* MediaMetaManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaMetaManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +117,7 @@
 				E84732681ECA07F400D5ED12 /* SIMetadata.m */,
 				E847326A1ECA09E500D5ED12 /* SIMediaItem.h */,
 				E847326B1ECA09E500D5ED12 /* SIMediaItem.m */,
+				E847327D1ECABBA300D5ED12 /* MediaMetaManager.h */,
 			);
 			path = MetaManager;
 			sourceTree = SOURCE_ROOT;
@@ -381,6 +383,7 @@
 				E84732591ECA026500D5ED12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
