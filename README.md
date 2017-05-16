@@ -69,14 +69,15 @@
 	@property NSNumber *discNumber;
 	@property NSNumber *discCount;
 	```
-5. 导出并保存到临时目录
+5. 保存修改
 
 	```objective-c
-    [mediaItem saveWithCompletionHandler:^(BOOL complete) {
+    mediaItem.metadata.name = @"TT" ;
+    [mediaItem saveChangeWithCompletionHandler:^(BOOL complete) {
         if (complete) {
-            NSLog(@"保存成功") ;
+            NSLog(@"修改成功") ;
         }
-    }];
+    }] ;
 	```
 
 	
