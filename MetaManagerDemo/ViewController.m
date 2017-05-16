@@ -28,11 +28,12 @@
         }
     }] ;
     
-    [mediaItem saveWithCompletionHandler:^(BOOL complete) {
+    mediaItem.metadata.name = @"TT" ;
+    [mediaItem saveChangeWithCompletionHandler:^(BOOL complete) {
         if (complete) {
-            NSLog(@"保存成功") ;
+            NSLog(@"修改成功") ;
         }
-    }];
+    }] ;
     
 
 }
