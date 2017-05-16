@@ -35,11 +35,11 @@ typedef void(^SICompletionHandler)(BOOL complete);
 
 
 /**
- Save Media
+ Save Change
 
  @param handler is Success
  */
-- (void)saveWithCompletionHandler:(SICompletionHandler)handler;
+- (void)saveChangeWithCompletionHandler:(SICompletionHandler)handler;
 
 /**
  Save Media
@@ -48,6 +48,6 @@ typedef void(^SICompletionHandler)(BOOL complete);
  
  @param handler is Success
  */
-- (void)saveToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler;
+- (void)exportToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler;
 
 @end

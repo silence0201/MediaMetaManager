@@ -144,7 +144,7 @@
     }];
 }
 
-- (void)saveToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler {
+- (void)exportToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler {
     NSString *presetName = AVAssetExportPresetPassthrough;
     AVAssetExportSession *session =
     [[AVAssetExportSession alloc] initWithAsset:self.asset
@@ -163,7 +163,6 @@
             NSFileManager *manager = [NSFileManager defaultManager];
             [manager removeItemAtURL:outputURL error:nil];
             [manager copyItemAtURL:sourceURL toURL:outputURL error:nil];
-            [self reset];
         }
         
         if (handler) {
@@ -174,17 +173,43 @@
     }];
 }
 
-- (void)saveWithCompletionHandler:(SICompletionHandler)handler {
-    NSString *outputPath = [self tempPath];
-    [self saveToPath:outputPath withCompletionHandler:handler];
+- (void)saveChangeWithCompletionHandler:(SICompletionHandler)handler {
+    NSString *presetName = AVAssetExportPresetPassthrough;                  
+    AVAssetExportSession *session =
+    [[AVAssetExportSession alloc] initWithAsset:self.asset
+                                     presetName:presetName];
+    
+    NSURL *outputURL = [self tempURL];
+    session.outputURL = outputURL;
+    session.outputFileType = self.filetype;
+    session.metadata = [self.metadata metadataItems];
+    
+    [session exportAsynchronouslyWithCompletionHandler:^{
+        AVAssetExportSessionStatus status = session.status;
+        BOOL success = (status == AVAssetExportSessionStatusCompleted);
+        if (success) {
+            NSURL *sourceURL = self.url;
+            NSFileManager *manager = [NSFileManager defaultManager];
+            [manager removeItemAtURL:sourceURL error:nil];
+            [manager moveItemAtURL:outputURL toURL:sourceURL error:nil];
+            [self reset];
+        }
+        
+        if (handler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(success);
+            });
+        }
+    }];
+
 }
 
-- (NSString *)tempPath {
+- (NSURL *)tempURL {
     NSString *tempDir = NSTemporaryDirectory();
     NSString *ext = [[self.url lastPathComponent] pathExtension];
     NSString *tempName = [NSString stringWithFormat:@"temp.%@", ext];
     NSString *tempPath = [tempDir stringByAppendingPathComponent:tempName];
-    return tempPath;
+    return [NSURL fileURLWithPath:tempPath];
 }
 
 - (void)reset {
