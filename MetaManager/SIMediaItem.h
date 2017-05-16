@@ -41,4 +41,13 @@ typedef void(^SICompletionHandler)(BOOL complete);
  */
 - (void)saveWithCompletionHandler:(SICompletionHandler)handler;
 
+/**
+ Save Media
+ 
+ @param path Custom Path
+ 
+ @param handler is Success
+ */
+- (void)saveToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler;
+
 @end

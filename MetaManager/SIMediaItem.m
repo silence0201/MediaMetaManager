@@ -144,14 +144,13 @@
     }];
 }
 
-- (void)saveWithCompletionHandler:(SICompletionHandler)handler {
-    
+- (void)saveToPath:(NSString *)path withCompletionHandler:(SICompletionHandler)handler {
     NSString *presetName = AVAssetExportPresetPassthrough;
     AVAssetExportSession *session =
     [[AVAssetExportSession alloc] initWithAsset:self.asset
                                      presetName:presetName];
     
-    NSURL *outputURL = [self tempURL];
+    NSURL *outputURL = [NSURL URLWithString:path];
     session.outputURL = outputURL;
     session.outputFileType = self.filetype;
     session.metadata = [self.metadata metadataItems];
@@ -164,7 +163,7 @@
             NSFileManager *manager = [NSFileManager defaultManager];
             [manager removeItemAtURL:outputURL error:nil];
             [manager copyItemAtURL:sourceURL toURL:outputURL error:nil];
-            [self reset];                                                   
+            [self reset];
         }
         
         if (handler) {
@@ -175,12 +174,17 @@
     }];
 }
 
-- (NSURL *)tempURL {
+- (void)saveWithCompletionHandler:(SICompletionHandler)handler {
+    NSString *outputPath = [self tempPath];
+    [self saveToPath:outputPath withCompletionHandler:handler];
+}
+
+- (NSString *)tempPath {
     NSString *tempDir = NSTemporaryDirectory();
     NSString *ext = [[self.url lastPathComponent] pathExtension];
     NSString *tempName = [NSString stringWithFormat:@"temp.%@", ext];
     NSString *tempPath = [tempDir stringByAppendingPathComponent:tempName];
-    return [NSURL fileURLWithPath:tempPath];
+    return tempPath;
 }
 
 - (void)reset {
