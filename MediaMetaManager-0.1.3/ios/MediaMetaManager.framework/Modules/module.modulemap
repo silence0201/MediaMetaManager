@@ -1,0 +1,6 @@
+framework module MediaMetaManager {
+  umbrella header "MediaMetaManager.h"
+
+  export *
+  module * { export * }
+}
